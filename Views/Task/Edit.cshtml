@@ -1,0 +1,45 @@
+﻿@model ToDoList.Models.ToDoes
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit Page</h2>
+<hr />
+
+@using (Html.BeginForm())
+{
+
+    <div class="input-group">
+        <span class="input-group-addon" id="txtdesc"> Description </span>
+
+        @Html.TextBoxFor(x => x.Description, new { @class = "form-control", placeholder = "Description", aria_describedby = "txtdesc" })
+
+    </div>
+
+    <div class="input-group">
+        <span class="input-group-addon" id="txtdate"> Write Due Date </span>
+
+        @Html.TextBoxFor(x => x.Date, new { @class = "form-control", placeholder = "DD/MM/YY - HH/MM", area_describedy = "txtdate" })
+    </div>
+
+    <div class="input-group">
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    </div>
+
+    <br />
+
+    <div class="input-group">
+        <input type="submit" value="Kaydet" class="btn btn-success" />
+
+    </div>
+    <br />
+
+    <div class="input-group">
+        @if (ViewBag.Result != null)
+        {
+            <div class="alert alert-@ViewBag.Status" role="alert"> @ViewBag.Result </div>
+        }
+
+    </div>
+}
+

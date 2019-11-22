@@ -1,0 +1,107 @@
+﻿
+@using ToDoList.ViewModels
+@model HomePageViewModel
+@{
+    ViewBag.Title = "homepage";
+}
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <div>
+                @Html.ActionLink("Add New Task", "New", "Task", null, new { @class = "btn btn-success" })
+            </div>
+            <br />
+
+            <table class="list-group col-md-12">
+                <tr class="list-group-item active">
+                    <td class=" col-md-9">
+                        Tasks
+                    </td>
+                    <td class="col-md-2">
+                        Options
+                    </td>
+                    <td class="col-md-1">
+                        Due Date
+                    </td>
+                    
+                </tr>
+
+             
+                @foreach (var task in Model.ToDoes)
+                {
+                    <tr class="list-group-item">
+
+                        <td class="col-md-9">
+                            <input type="checkbox">
+                            @(task.Description)
+                        </td>
+                        <td class="col-md-2">
+                            @Html.ActionLink("Edit", "Edit", "Task", new { todoId = task.ID }, new { @class = "btn btn-warning btn-xs" })
+                            @Html.ActionLink("Delete", "Delete", "Task", new { todoId = task.ID }, new { @class = "btn btn-danger btn-xs" })
+                           
+
+                        </td>
+                        <td class="col-md-1">
+                            @(task.Date)
+                        </td>
+                        
+                    </tr>
+                }
+
+
+            </table>
+
+            
+            <p id="time"></p>
+           
+            <script>
+                
+                var myVar = setInterval(myTimer, 1000);
+
+
+                function myTimer() {
+                    var d = new Date();
+                    document.getElementById("time").innerHTML = d.toLocaleString();
+                }
+
+
+                var d = new Date();
+                var n = d.toString("dd:MM:yy h:mm:ss");
+
+                if (task.Date == n)
+                    var int = self.setInterval("showAlertAfter5Seconds()", 5000);
+
+                function showAlertAfter5Seconds() {
+                    alert('Due Date of Task !!');
+                }
+
+                var int = self.setInterval("checkDates()", 1000)
+
+                function checkDates() {
+                    
+                    @foreach(var task in Model.ToDoes)
+                    {
+                        var d = new DateTime();
+                        if(task.Date == d)
+                        {
+                            @Html.ValidationMessage("mehmet");
+                        }
+                    }
+                }
+
+            </script>
+            @*<button onclick="int=window.clearInterval(int)">Stop Alerts!!</button>*@
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
